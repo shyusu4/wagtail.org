@@ -1,0 +1,6 @@
+{% load embed_tags %}
+{# Overrides Wagtail's template to give embedded iframes an accessible name. #}
+<div{% if embed.is_responsive %} style="padding-bottom: {{ embed.ratio_css }};" class="responsive-object"{% endif %}>
+    {% firstof embed.title embed.provider_name "Embedded content" as iframe_title %}
+    {{ embed.html|add_iframe_title:iframe_title }}
+</div>
