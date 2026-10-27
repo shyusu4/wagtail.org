@@ -4,7 +4,7 @@
         <div class="modal__overlay" tabindex="-1" data-micromodal-close>
             {% for item in get_started_menu.body %} {# there's actually only 1 item, as max_num=1 #}
                 {% with item.value as get_started %}
-                    <div class="modal__container" role="dialog" aria-modal="true" {% if get_started.heading %}aria-labelledby="get-started-menu-title"{% endif %}>
+                    <div class="modal__container" role="dialog" aria-modal="true" {% if get_started.heading %}aria-labelledby="get-started-menu-title"{% else %}aria-label="Get started"{% endif %}>
                         <header class="modal__header">
                             <button class="modal__close-button" aria-label="Close the Get Started menu" data-micromodal-close>
                                 <svg class="modal__close-icon" aria-hidden="true">
