@@ -24,7 +24,12 @@ class MobileMenu {
         // Only create focus trap if required elements exist
         if (this.mobileMenu) {
             this.focusTrap = createFocusTrap(this.mobileMenu, {
-                allowOutsideClick: (e) => !!e.target.closest('[data-site-search-mobile]'),
+                // The toggle sits outside the menu, so let clicks on it through
+                // to its own handler, which closes the menu.
+                allowOutsideClick: (e) =>
+                    !!e.target.closest(
+                        '[data-site-search-mobile], [data-mobile-menu-toggle]',
+                    ),
             });
         } else {
             this.focusTrap = null;
@@ -34,8 +39,9 @@ class MobileMenu {
     }
 
     bindEventListeners() {
-        // Use pointerup for reliable mobile/touch interaction
-        this.node.addEventListener('pointerup', (e) => {
+        // `click` fires for mouse, touch and keyboard (Enter and Space);
+        // `pointerup` only fires for pointer input.
+        this.node.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
             this.toggle();
