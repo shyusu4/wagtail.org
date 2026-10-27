@@ -53,7 +53,9 @@
 
     &__description-link {
         color: var(--color--text);
-        text-decoration: none;
+        // Underlined so the link doesn't rely on colour alone to stand out
+        // from the surrounding text.
+        text-decoration: underline;
         transition: color $transition;
 
         &:hover,
