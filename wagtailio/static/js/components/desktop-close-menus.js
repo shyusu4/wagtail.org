@@ -46,7 +46,17 @@ class DesktopCloseMenus {
 
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
+                // If focus is inside an open submenu, hand it back to that
+                // submenu's trigger so it isn't lost when the menu hides.
+                const openTrigger = Array.from(this.desktopSubMenus).find(
+                    (item) =>
+                        item.getAttribute('aria-expanded') === 'true' &&
+                        item
+                            .closest('[data-has-subnav]')
+                            .contains(document.activeElement),
+                );
                 this.closeMenus();
+                if (openTrigger) openTrigger.focus();
             };
         });
     }

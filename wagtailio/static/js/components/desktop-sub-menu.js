@@ -18,6 +18,16 @@ class DesktopSubMenu {
     }
 
     bindEventListeners() {
+        // Close the submenu when keyboard focus moves out of it. A null
+        // relatedTarget means focus left the page or went to a non-focusable
+        // area, which the click handlers already deal with.
+        this.toggleNode.addEventListener('focusout', (e) => {
+            if (e.relatedTarget && !this.toggleNode.contains(e.relatedTarget)) {
+                this.toggleNode.classList.remove(this.activeClass);
+                this.node.setAttribute('aria-expanded', 'false');
+            }
+        });
+
         this.node.addEventListener('click', (e) => {
             e.preventDefault();
             // Close other menu items that may be open

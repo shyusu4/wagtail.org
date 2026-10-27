@@ -11,7 +11,9 @@
     bottom: 0;
     left: auto;
     display: none;
-    width: 100%;
+    // Auto width fills the space left by the side margins; 100% plus the
+    // margins made the banner 20px too wide and caused horizontal scroll.
+    width: auto;
 
     &.inactive {
         display: none;

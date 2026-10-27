@@ -54,12 +54,19 @@
         inset: 0;
         opacity: 1;
         transform: translate3d(0, 100%, 0);
-        transition: opacity $transition, transform $transition;
+        transition:
+            opacity $transition,
+            transform $transition,
+            visibility $transition;
 
+        // `visibility: hidden` takes the collapsed form out of the tab order and
+        // the accessibility tree. Transitioning it keeps the form visible until
+        // the slide-out animation has finished.
         &.is-hidden {
             opacity: 0;
             pointer-events: none;
             transform: translate3d(0, -200%, 0);
+            visibility: hidden;
         }
 
         #{$root}__button {

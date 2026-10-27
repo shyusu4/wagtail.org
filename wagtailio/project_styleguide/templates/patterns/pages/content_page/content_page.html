@@ -4,6 +4,9 @@
 {% block content %}
     {% if page.has_hero %}
         {% include "patterns/components/hero/hero.html" with value=page classes=page.section_navigation|yesno:"hero--no-margin," %}
+    {% else %}
+        {# The hero holds the page's h1; without one, keep a hidden h1 so the page still has a heading. #}
+        <h1 class="u-sr-only">{{ page.title }}</h1>
     {% endif %}
 
     {% include "patterns/components/section-navigation/section-navigation.html" with items=page.section_navigation %}
